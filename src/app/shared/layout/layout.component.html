@@ -1,0 +1,18 @@
+<nz-layout class="layout">
+  <nz-header>
+    <div class="logo"></div>
+    <ul [nzTheme]="'light'" nz-menu [nzMode]="'horizontal'" style="line-height: 64px;" [nzSelectable]="false">
+      <li nz-menu-item [routerLink]="['/index']">
+        <img src="assets/images/logo.png" alt="" class="header-logo">
+      </li>
+      <li nz-menu-item [routerLink]="['/soft']" [nzSelected]="router.url === '/soft'">安装软件</li>
+      <li nz-menu-item [routerLink]="['/service']" [nzSelected]="router.url === '/service'">生成服务</li>
+    </ul>
+  </nz-header>
+  <nz-content style="padding:35px;">
+    <div style="background:#fff; padding: 24px; min-height: 280px;">
+      <router-outlet></router-outlet>
+    </div>
+  </nz-content>
+  <nz-footer style="text-align: center;">Ant Design ©2017 Implement By Angular</nz-footer>
+</nz-layout>
