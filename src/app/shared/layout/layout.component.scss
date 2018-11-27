@@ -1,7 +1,3 @@
-nz-layout {
-  height: 100%;
-}
-
 .ant-layout-header {
   background: transparent;
   padding: 0;
@@ -10,4 +6,20 @@ nz-layout {
 .header-logo {
   border-radius: 50%;
   width: 25px;
+}
+
+nz-footer {
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+}
+
+.layout {
+  min-height: 100%;
+  position: relative;
+}
+
+nz-content {
+  padding: 40px;
 }
