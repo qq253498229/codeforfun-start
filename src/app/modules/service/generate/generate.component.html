@@ -1,5 +1,45 @@
-<nz-card >
-  <p>Card content</p>
-  <p>Card content</p>
-  <p>Card content</p>
-</nz-card>
+<div nz-row [nzGutter]="8">
+  <div nz-col [nzSpan]="8">
+    <nz-card nzTitle="基础信息">
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="group">Group</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input id="group" [(ngModel)]="model.group">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="artifact">Artifact</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input id="artifact" [(ngModel)]="model.artifact">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="artifact">服务</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input placeholder="input here" nz-input [(ngModel)]="inputValue" (input)="onInput($event.target?.value)" [nzAutocomplete]="auto">
+          <nz-autocomplete nzBackfill #auto>
+            <nz-auto-option *ngFor="let option of options" [nzValue]="option" (click)="choose(option)">
+              {{option}}
+            </nz-auto-option>
+          </nz-autocomplete>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="artifact"></nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <nz-tag *ngFor="let tag of tags;let i = index" nzMode="closeable" (nzOnClose)="remove(i)">{{tag}}</nz-tag>
+        </nz-form-control>
+      </nz-form-item>
+    </nz-card>
+  </div>
+  <div nz-col [nzSpan]="8">
+    <nz-card nzTitle="Card title">
+      <p>Card content</p>
+    </nz-card>
+  </div>
+  <div nz-col [nzSpan]="8">
+    <nz-card nzTitle="Card title">
+      <p>Card content</p>
+    </nz-card>
+  </div>
+</div>
