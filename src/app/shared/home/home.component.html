@@ -1,31 +1,34 @@
-<h1>第一步 安装软件</h1>
-<h2 id="_安装docker" (click)="dockerFlag = !dockerFlag">安装Docker</h2>
+<nz-card>
 
-<pre *ngIf="dockerFlag">
-<code>
-  apt-get update && apt-get install -y curl
+  <h1>第一步 安装软件</h1>
+  <h2 id="_安装docker" (click)="dockerFlag = !dockerFlag">安装Docker</h2>
 
-  curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
-</code>
-</pre>
+  <pre *ngIf="dockerFlag">
+    <code>
+      apt-get update && apt-get install -y curl
 
-<h2 id="_安装k8s" (click)="k8sFlag = !k8sFlag">安装K8S</h2>
-<pre *ngIf="k8sFlag">
-<code>
-  apt-get update && apt-get install -y curl apt-transport-https
+      curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+    </code>
+  </pre>
 
-  curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -
+  <h2 id="_安装k8s" (click)="k8sFlag = !k8sFlag">安装K8S</h2>
+  <pre *ngIf="k8sFlag">
+    <code>
+      apt-get update && apt-get install -y curl apt-transport-https
 
-  cat << EOF >/etc/apt/sources.list.d/kubernetes.list
+      curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -
 
-  deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main
+      cat << EOF >/etc/apt/sources.list.d/kubernetes.list
 
-  EOF
+      deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main
 
-  apt-get update
+      EOF
 
-  apt-get install -y kubelet kubeadm kubectl
+      apt-get update
 
-  systemctl enable kubelet && systemctl start kubelet
-</code>
-</pre>
+      apt-get install -y kubelet kubeadm kubectl
+
+      systemctl enable kubelet && systemctl start kubelet
+    </code>
+  </pre>
+</nz-card>
