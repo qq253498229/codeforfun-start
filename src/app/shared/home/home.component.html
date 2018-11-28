@@ -1,3 +1,31 @@
-<p>
-  home works!
-</p>
+<h1>第一步 安装软件</h1>
+<h2 id="_安装docker" (click)="dockerFlag = !dockerFlag">安装Docker</h2>
+
+<pre *ngIf="dockerFlag">
+<code>
+  apt-get update && apt-get install -y curl
+
+  curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+</code>
+</pre>
+
+<h2 id="_安装k8s" (click)="k8sFlag = !k8sFlag">安装K8S</h2>
+<pre *ngIf="k8sFlag">
+<code>
+  apt-get update && apt-get install -y curl apt-transport-https
+
+  curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -
+
+  cat << EOF >/etc/apt/sources.list.d/kubernetes.list
+
+  deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main
+
+  EOF
+
+  apt-get update
+
+  apt-get install -y kubelet kubeadm kubectl
+
+  systemctl enable kubelet && systemctl start kubelet
+</code>
+</pre>
