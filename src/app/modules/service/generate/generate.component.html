@@ -1,6 +1,7 @@
-<div nz-row [nzGutter]="8">
-  <div nz-col [nzSpan]="8">
-    <nz-card nzTitle="基础信息">
+<nz-card nzTitle="选择服务">
+
+  <div nz-row [nzGutter]="8">
+    <div nz-col [nzSpan]="12">
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="group">Group</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
@@ -14,9 +15,20 @@
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
+        <nz-form-control [nzSpan]="3" [nzOffset]="6">
+          <button nz-button nzType="primary" class="generate-btn" (click)="generate()">生成</button>
+        </nz-form-control>
+        <nz-form-control [nzSpan]="4">
+          <a href="javascript:void(0);" (click)="moreFlag = !moreFlag">高级选项</a>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="12">
+      <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="artifact">服务</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-          <input placeholder="input here" nz-input [(ngModel)]="inputValue" (input)="onInput($event.target?.value)" [nzAutocomplete]="auto">
+          <input placeholder="Eureka, Hystrix" nz-input [(ngModel)]="inputValue" (input)="onInput($event.target?.value)"
+                 [nzAutocomplete]="auto">
           <nz-autocomplete nzBackfill #auto>
             <nz-auto-option *ngFor="let option of options" [nzValue]="option" (click)="choose(option)">
               {{option}}
@@ -25,21 +37,27 @@
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="artifact"></nz-form-label>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="artifact">已选</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-          <nz-tag *ngFor="let tag of tags;let i = index" nzMode="closeable" (nzOnClose)="remove(i)">{{tag}}</nz-tag>
+          <ng-container *ngFor="let tag of list;let i = index">
+            <nz-tag *ngIf="tag['selected']" [nzColor]="'blue'" nzMode="closeable"
+                    (nzOnClose)="remove(i)">{{tag.name}}</nz-tag>
+          </ng-container>
         </nz-form-control>
       </nz-form-item>
-    </nz-card>
+    </div>
   </div>
-  <div nz-col [nzSpan]="8">
-    <nz-card nzTitle="Card title">
-      <p>Card content</p>
-    </nz-card>
-  </div>
-  <div nz-col [nzSpan]="8">
-    <nz-card nzTitle="Card title">
-      <p>Card content</p>
-    </nz-card>
-  </div>
-</div>
+  <ng-container *ngIf="moreFlag">
+    <div nz-row [nzGutter]="8">
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-control [nzSm]="14" [nzXs]="24" [nzOffset]="6">
+            <label nz-checkbox *ngFor="let item of list" [(ngModel)]="item['selected']">
+              <span>{{item.name}}</span>
+            </label>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+  </ng-container>
+</nz-card>
