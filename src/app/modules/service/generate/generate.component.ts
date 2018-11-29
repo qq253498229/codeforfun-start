@@ -63,8 +63,11 @@ export class GenerateComponent implements OnInit {
     const selected = _.filter(this.list, (obj) => {
       return obj['selected'] === true;
     });
-    console.log(selected);
-    this.http.post('/api/eureka', {selected: selected}).subscribe(res => {
+    if (!selected || selected.length === 0) {
+      alert('请选择服务');
+      return;
+    }
+    this.http.post('/api/generate', {selected: selected}).subscribe(res => {
       console.log(res);
     });
   }
