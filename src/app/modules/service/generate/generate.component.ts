@@ -8,7 +8,8 @@ import * as _ from 'underscore';
   encapsulation: ViewEncapsulation.None
 })
 export class GenerateComponent implements OnInit {
-  inputValue: string;
+  inputValue = '';
+  moreFlag = false;
   model = {
     group: 'com.example',
     artifact: 'demo'
