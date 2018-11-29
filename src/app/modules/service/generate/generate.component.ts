@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import * as _ from 'underscore';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-generate',
@@ -15,18 +16,19 @@ export class GenerateComponent implements OnInit {
     artifact: 'demo'
   };
   // 后台传过来的数据
-  list = [
-    {name: 'Eureka'},
-    {name: 'Gateway'},
-    {name: 'Oauth'}
-  ];
+  list = [];
   // 搜索框选项(string数组)
   options = [];
 
-  constructor() {
+  constructor(
+    private http: HttpClient
+  ) {
   }
 
   ngOnInit() {
+    this.http.get<any[]>('/api/').subscribe(res => {
+      this.list = res;
+    });
   }
 
   onInput(value: string): void {
@@ -35,7 +37,7 @@ export class GenerateComponent implements OnInit {
       return obj['selected'] !== true;
     });
     _.each(unSelected, (obj) => {
-      if (new RegExp('^' + value).test(obj.name)) {
+      if (new RegExp('^' + value).test(obj.name) || new RegExp('^' + value).test(obj.key)) {
         this.options.push(obj.name);
       }
     });
@@ -62,5 +64,8 @@ export class GenerateComponent implements OnInit {
       return obj['selected'] === true;
     });
     console.log(selected);
+    this.http.post('/api/eureka', {selected: selected}).subscribe(res => {
+      console.log(res);
+    });
   }
 }

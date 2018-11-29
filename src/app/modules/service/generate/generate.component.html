@@ -49,15 +49,29 @@
   </div>
   <ng-container *ngIf="moreFlag">
     <div nz-row [nzGutter]="8">
-      <div nz-col [nzSpan]="12">
-        <nz-form-item>
-          <nz-form-control [nzSm]="14" [nzXs]="24" [nzOffset]="6">
-            <label nz-checkbox *ngFor="let item of list" [(ngModel)]="item['selected']">
-              <span>{{item.name}}</span>
-            </label>
-          </nz-form-control>
-        </nz-form-item>
-      </div>
+      <ng-container *ngFor="let item of list">
+        <div nz-col [nzSpan]="8">
+          <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24">{{item.name}}</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24">
+              <label nz-checkbox [(ngModel)]="item['selected']">
+              </label>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24">端口</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24">
+              <input type="number" nz-input [(ngModel)]="item['port']">
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24">服务名</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24">
+              <input nz-input [(ngModel)]="item['serviceName']">
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </ng-container>
     </div>
   </ng-container>
 </nz-card>
