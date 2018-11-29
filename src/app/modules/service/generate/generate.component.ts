@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import * as _ from 'underscore';
 import {HttpClient} from '@angular/common/http';
+import {NzMessageService, NzNotificationService} from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-generate',
@@ -21,7 +22,9 @@ export class GenerateComponent implements OnInit {
   options = [];
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private message: NzMessageService,
+    private note: NzNotificationService
   ) {
   }
 
@@ -64,11 +67,11 @@ export class GenerateComponent implements OnInit {
       return obj['selected'] === true;
     });
     if (!selected || selected.length === 0) {
-      alert('请选择服务');
+      this.note.create('warning', '警告', '您尚未选择服务，请选择服务后再点击生成');
       return;
     }
-    this.http.post('/api/generate', {selected: selected}).subscribe(res => {
-      console.log(res);
+    this.http.post('/api/generate', selected).subscribe(res => {
+      window.location.href = '/api/download/' + res['name'];
     });
   }
 }
